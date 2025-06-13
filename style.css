@@ -6,24 +6,21 @@ body {
   overflow: hidden;
   margin: 0;
   padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .container {
   position: relative;
   z-index: 2;
-  margin-top: 100px;
 }
 
 h1 {
   font-size: 3em;
   margin-bottom: 20px;
-}
-
-.gallery img {
-  width: 200px;
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ff99cc;
 }
 
 /* Kalpli animasyonlar */
@@ -39,9 +36,9 @@ h1 {
 
 .hearts::before,
 .hearts::after {
-  content: '❤️ ❤️ 💖 💕 💗 💓 💞';
+  content: '❤️ 💖 💕 💗 💓 💞 💘 💝';
   position: absolute;
-  animation: floatHearts 10s linear infinite;
+  animation: floatHearts 12s linear infinite;
   font-size: 24px;
   white-space: nowrap;
   width: 100%;
