@@ -4,7 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hacer ❤️ Alimert</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Temel düzen */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #fff0f5;
+      font-family: 'Comic Sans MS', cursive;
+      color: #d63384;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      text-align: center;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      user-select: none;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2 {
+      font-size: 3rem;
+      margin: 10px 0 30px 0;
+      font-weight: bold;
+      color: #e91e63;
+      user-select: none;
+    }
+
+    p {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    /* Kalplerin arka plandaki yukarı hareket animasyonu */
+    #hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation-name: floatUp;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      user-select: none;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 2px #d63384);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="hearts-container"></div>
@@ -15,6 +92,44 @@
     <p>Birlikte <span id="day-counter"></span> gündür beraberiz!</p>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Gün sayacı
+    const startDate = new Date("2025-05-18");
+    const today = new Date();
+    const diffTime = today - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById("day-counter").textContent = diffDays >= 0 ? diffDays : 0;
+
+    // Arka plandaki yukarı süzülen kalpler
+    const heartsContainer = document.getElementById('hearts-container');
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '❤️';
+
+      heart.style.left = Math.random() * 100 + 'vw';
+
+      const size = Math.random() * 20 + 20;
+      heart.style.fontSize = size + 'px';
+
+      heart.style.animationDuration = (Math.random() * 7 + 5) + 's';
+
+      heart.style.animationDelay = (Math.random() * 10) + 's';
+
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, (parseFloat(heart.style.animationDuration) + parseFloat(heart.style.animationDelay)) * 1000);
+    }
+
+    setInterval(createHeart, 300);
+
+    // Sayfa açılır açılmaz birkaç kalp oluştur
+    for(let i = 0; i < 20; i++) {
+      setTimeout(createHeart, i * 300);
+    }
+  </script>
 </body>
 </html>
