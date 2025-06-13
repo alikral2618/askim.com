@@ -1,4 +1,5 @@
-/* Temel düzen */
+/* Temel düzen aynı */
+
 body {
   margin: 0;
   padding: 0;
@@ -24,7 +25,46 @@ h1 {
   font-size: 4rem;
   margin: 0;
   user-select: none;
+  position: relative;
+  display: inline-block;
 }
+
+/* Buraya kalpler yanından geçecek */
+.hearts-next-to-text {
+  position: absolute;
+  top: 50%;
+  left: 105%; /* Yazının sağında başlar */
+  transform: translateY(-50%);
+  width: 200px;
+  height: 50px;
+  overflow: visible;
+}
+
+/* Kalplerin stili (yanlardan geçen) */
+.hearts-next-to-text .heart {
+  position: absolute;
+  font-size: 24px;
+  color: #e91e63;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 2px #d63384);
+  user-select: none;
+  animation-name: moveRightToLeft;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes moveRightToLeft {
+  0% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+}
+
+/* Diğer stiller aynen kalacak */
 
 h2 {
   font-size: 3rem;
@@ -39,19 +79,18 @@ p {
   margin: 0;
 }
 
-/* Kalp animasyonlarının kapsayıcısı */
+/* Kalplerin arka plandaki yukarı hareket animasyonu */
 #hearts-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Tıklanabilirliği engeller */
+  pointer-events: none;
   overflow: hidden;
   z-index: 1;
 }
 
-/* Tek bir kalbin stili */
 .heart {
   position: absolute;
   font-size: 24px;
@@ -63,7 +102,6 @@ p {
   filter: drop-shadow(0 0 2px #d63384);
 }
 
-/* Kalbin yukarı doğru süzülme animasyonu */
 @keyframes floatUp {
   0% {
     transform: translateY(100vh) scale(1);
