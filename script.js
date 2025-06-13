@@ -5,7 +5,7 @@ const diffTime = today - startDate;
 const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 document.getElementById("day-counter").textContent = diffDays >= 0 ? diffDays : 0;
 
-// Kalpli animasyonlar oluşturma
+// Arka plandaki yukarı süzülen kalpler
 const heartsContainer = document.getElementById('hearts-container');
 
 function createHeart() {
@@ -13,31 +13,50 @@ function createHeart() {
   heart.classList.add('heart');
   heart.textContent = '❤️';
 
-  // Kalbin rastgele başlangıç pozisyonu (x ekseni)
   heart.style.left = Math.random() * 100 + 'vw';
 
-  // Kalbin rastgele boyutu
-  const size = Math.random() * 20 + 20; // 20px - 40px arası
+  const size = Math.random() * 20 + 20;
   heart.style.fontSize = size + 'px';
 
-  // Animasyon süresi rastgele (5s - 12s arası)
   heart.style.animationDuration = (Math.random() * 7 + 5) + 's';
 
-  // Animasyon gecikmesi rastgele (0s - 10s arası)
   heart.style.animationDelay = (Math.random() * 10) + 's';
 
   heartsContainer.appendChild(heart);
 
-  // Animasyon bittikten sonra kalbi DOM'dan kaldır
   setTimeout(() => {
     heart.remove();
   }, (parseFloat(heart.style.animationDuration) + parseFloat(heart.style.animationDelay)) * 1000);
 }
 
-// Sürekli kalpler oluştur
 setInterval(createHeart, 300);
-
-// Başlangıçta birkaç kalp oluştur (sayfa dolunca hemen animasyon başlasın diye)
 for(let i = 0; i < 20; i++) {
   setTimeout(createHeart, i * 300);
 }
+
+// "Hacer ❤️ Alimert" yanından geçen kalpler
+const heartsNextToText = document.querySelector('.hearts-next-to-text');
+
+function createHeartNextToText() {
+  const heart = document.createElement('span');
+  heart.classList.add('heart');
+  heart.textContent = '❤️';
+
+  const size = Math.random() * 15 + 15; // 15px - 30px
+  heart.style.fontSize = size + 'px';
+
+  heart.style.top = Math.random() * 40 + 'px'; // 0 - 40 px arası yukarı aşağı
+
+  const duration = Math.random() * 4 + 3; // 3s - 7s
+  heart.style.animationDuration = duration + 's';
+
+  heart.style.left = '100%';
+
+  heartsNextToText.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, duration * 1000);
+}
+
+setInterval(createHeartNextToText, 500);
