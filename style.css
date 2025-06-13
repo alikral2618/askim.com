@@ -1,0 +1,17 @@
+body {
+  background: #ffe6f0;
+  font-family: 'Courier New', cursive;
+  text-align: center;
+  color: #d63384;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.gallery img {
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ff99cc;
+}
